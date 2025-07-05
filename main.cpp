@@ -28,15 +28,46 @@ void save_courses(){
 
 }
 
+void load_courses()
+{
+	ifstream file("NameOfStudent");
+	string line;
+	string courseName = "";
+	int credit;
+	string grade = "";
+	while(getline(file,line)){
+
+		int sizeLine = size(line);
+		int cnt = 0; // cnt for knowing if already encountered to ':'
+		for (int i = 0; i < sizeLine; ++i)
+		{
+			if(line[i] != ':' and cnt == 0)
+				courseName += line[i];
+
+			if (line[i] == ':') 
+				cnt ++;
+			else if (cnt == 1){
+				credit = int(line[i]) - 48;
+			}
+			else if(cnt == 2){
+				grade += line[i]; 
+			}
+			
+		}
+		cout << courseName << " " << credit << " " << grade;
+	}
+}
+
+
 int main()
 {
-	cout << "Please enter number of courses: ";
-	int courses;
-	cin >> courses;
+	// cout << "Please enter number of courses: ";
+	// int courses;
+	// cin >> courses;
 
-	while(courses--){
-		save_courses();
-	}
-
+	// while(courses--){
+	// 	save_courses();
+	// }
+	load_courses();
 	return 0;
 }
