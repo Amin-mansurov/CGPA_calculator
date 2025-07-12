@@ -23,7 +23,7 @@ CGPA_calculator/
 ### Шаг 1. Клонирование репозитория:
 
 ```bash
-git clone https://github.com/your-username/CGPA_calculator.git
+git clone https://github.com/Amin-mansurov/CGPA_calculator.git
 cd CGPA_calculator
 ```
 
@@ -47,7 +47,7 @@ make
 ./cgpa_calculator
 ```
 
-> Убедитесь, что установлены компилятор g++ (версии 11+) и CMake (3.10+).
+> Убедитесь, что установлены компилятор g++ (версии 17+) и CMake (3.10+).
 
 ---
 
