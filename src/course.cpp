@@ -5,23 +5,26 @@
 
 using namespace std;
 
+int calculate_grade_point(int credit, int grade);
+double calculate_gpa(int sumOfCredit, int sumOfGradePoint);
+
 void save_courses(){
 
 	ofstream file("NameOfStudent",	 std::ofstream::app);
 
 	cin.ignore();
 	string courseName;
-	cout << "Please enter course name: ";
+	cout << "Please enter course name (example ABC): ";
 	cin  >> courseName;
 
 	cin.ignore();
 	int credit;
-	cout << "Please enter credit of course: ";
+	cout << "Please enter credit of course (example 8): ";
 	cin >> credit;
 
 	cin.ignore();
 	string grade;
-	cout << "Please enter grade of course: ";
+	cout << "Please enter grade of course (example A+): ";
 	getline(cin, grade);
 	
 	file << courseName << ":" << credit << ":" << grade << endl;
@@ -39,11 +42,14 @@ void load_courses()
 									{"D+",1.3},{"D",1},{"F",0}};
 	ifstream file("NameOfStudent");
 	string line;
-	string courseName = "";
 	int credit;
-	string grade = "";
 	int gradeInt;
+	int sumOfCredit = 0;
+	int sumOfGradePoint = 0;
 	while(getline(file,line)){
+
+		string grade = "";
+		string courseName = "";
 
 		int sizeLine = size(line);
 		int cnt = 0; // cnt for knowing if already encountered to ':'
@@ -56,15 +62,29 @@ void load_courses()
 				cnt ++;
 			else if (cnt == 1){
 				credit = int(line[i]) - 48;
-			}
+			}	
 			else if(cnt == 2){
 				grade += line[i]; 
 			}
 			
 		}
-		cout << courseName << " " << credit << " " << grade << " ";
-		
-		cout << gradeToInt[grade];
+		gradeInt = gradeToInt[grade];
+		int gradePoint = calculate_grade_point(credit, gradeInt);
+		cout <<"Course Name: "<< courseName << "\ncredit = " << credit << "\ngrade  = " << grade << "\ngrade point  = " << gradePoint << "\n" ;
+		sumOfCredit += credit;
+		sumOfGradePoint += gradePoint;
+		cout << endl;
 	}
+	cout << "\nGPA = " <<  calculate_gpa( sumOfCredit,  sumOfGradePoint);
+	cout << '\n';
+	file.close();
+}
 
+int calculate_grade_point(int credit, int grade){
+
+	return (credit * grade);
+
+}	
+double calculate_gpa(int sumOfCredit, int sumOfGradePoint){
+	return (double(sumOfGradePoint) / sumOfCredit );
 }
