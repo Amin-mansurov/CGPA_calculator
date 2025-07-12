@@ -13,10 +13,10 @@ int main()
 		cin >> choice;
 		switch(choice){
 			case 1:
-				save_courses();
+				load_courses();
 				break;
 			case 2:
-				load_courses();
+				save_courses();
 				break;
 			default:
 			return 0;
